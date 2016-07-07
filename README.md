@@ -24,7 +24,7 @@
 
 **Todoo** is still under development. You can download the latest version from the [releases](https://github.com/vesparny/todoo/releases) page.
 
-Please not that binaries are not signed. If you need them to be signed you can easily do it with your own certificates.
+Please note that binaries are not signed. If you need them to be signed you can easily do it with your own certificates.
 
 
 <p align="center">
