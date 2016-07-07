@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Todoo</title>
+    <link href="./style.css" media="all" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root">Something wrong</div>
+    <script>
+      process.versions.electron ? require('../dist/main') : require('./index')
+    </script>
+  </body>
+</html>
