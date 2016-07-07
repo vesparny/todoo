@@ -1,44 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="601px" height="536px" viewBox="0 0 601 536" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
-    <title>app-icon 2@3x</title>
+    <title>app-icon</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <circle id="path-1" cx="300" cy="264" r="256"></circle>
-        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
-            <feMorphology radius="4" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
-            <feOffset dx="0" dy="2" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
-            <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
-            <feOffset dx="0" dy="2" in="shadowInner" result="shadowInner"></feOffset>
-            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
-            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
-            <feMorphology radius="4" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter2"></feMorphology>
-            <feOffset dx="0" dy="2" in="shadowSpreadOuter2" result="shadowOffsetOuter2"></feOffset>
-            <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
-            <feOffset dx="0" dy="2" in="shadowInner" result="shadowInner"></feOffset>
-            <feComposite in="shadowOffsetOuter2" in2="shadowInner" operator="out" result="shadowOffsetOuter2"></feComposite>
-            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter2" result="shadowBlurOuter2"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"></feColorMatrix>
-            <feMerge>
-                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
-                <feMergeNode in="shadowMatrixOuter2"></feMergeNode>
-            </feMerge>
-        </filter>
-        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-4" y="-4" width="520" height="520">
-            <rect x="40" y="4" width="520" height="520" fill="white"></rect>
-            <use xlink:href="#path-1" fill="black"></use>
+        <circle id="path-1" cx="256" cy="256" r="256"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="512" height="512" fill="white">
+            <use xlink:href="#path-1"></use>
         </mask>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Oval-1">
-            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-            <use stroke="#000000" mask="url(#mask-3)" stroke-width="8" xlink:href="#path-1"></use>
-        </g>
-        <g id="app-icon" transform="translate(0.000000, 41.000000)">
+        <use id="Oval-1" stroke="#FFFFFF" mask="url(#mask-2)" stroke-width="16" fill="#85BF6B" xlink:href="#path-1"></use>
+        <g id="app-icon" transform="translate(48.000000, 138.000000)" fill="#000000">
             <g id="Group">
-                <polygon id="Shape" points="0 0 600 0 600 446.511628 0 446.511628"></polygon>
-                <polygon id="Shape" fill="#000000" points="225 301.395349 120 223.255814 85 249.302326 225 353.488372 525 130.232558 490 104.186047"></polygon>
+                <polygon id="Shape" points="132.045455 186.341209 33.0113636 112.577488 2.84217094e-14 137.165395 132.045455 235.517023 415 24.7635349 381.988636 0.175627907"></polygon>
             </g>
         </g>
     </g>
