@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/vesparny/todoo"><img src="https://cloud.githubusercontent.com/assets/82070/16650981/4d6ef78e-4441-11e6-8c81-7b146874e887.png" alt="todoo" width="200"></a>
+  <a href="https://github.com/vesparny/todoo"><img src="https://cloud.githubusercontent.com/assets/82070/16671208/7d8e676c-449e-11e6-87b2-b2f0d9da8e00.png" alt="todoo" width="200"></a>
   <br>
   Todoo
   <br>
