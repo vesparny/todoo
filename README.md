@@ -22,10 +22,11 @@
 
 ## Install
 
-**Todoo** is still under development. You can download the latest version from the [releases](https://github.com/vesparny/todoo/releases) page.
+**Todoo** is still under development.
+
+**You can download the latest version from the [releases](https://github.com/vesparny/todoo/releases) page.**
 
 Please note that binaries are not signed. If you need them to be signed you can easily do it with your own certificates.
-
 
 <p align="center">
   <img src="https://cloud.githubusercontent.com/assets/82070/16650965/2e0d48a0-4441-11e6-84ba-75e103b234c4.gif" style="max-width:100%" alt="screenshot" align="center">
@@ -49,6 +50,10 @@ Please note that binaries are not signed. If you need them to be signed you can 
 
 Refer to open [issues](https://github.com/vesparny/todoo/issues). Also feel free to propose features and report bugs.
 
+
+## Development
+
+In order to run the development version locally, you need to:
 
 ### Install dependencies
 
@@ -90,7 +95,7 @@ brew install wine
 ## Credits
 
 * Google for providing Icons https://design.google.com/icons
-* [r-park](https://github.com/r-park) form making https://github.com/r-park/todo-react-redux (I've shamelessly stolen the style from there)
+* [r-park](https://github.com/r-park) for making https://github.com/r-park/todo-react-redux (I've shamelessly stolen the style from there)
 
 ## License
 
