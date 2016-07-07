@@ -11,7 +11,7 @@ const TodoList = ({ todos, dispatch }) => {
     )
   }
   return (
-    <div className='task-list'>
+    <div className='task-list overflow-scroll'>
       {todos.map(todo =>
         <Todo
           key={todo.id}

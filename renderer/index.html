@@ -7,9 +7,10 @@
     <link href="./style.css" media="all" rel="stylesheet" />
   </head>
   <body>
-    <div id="root">Something wrong</div>
+    <div id="root" class="h-100">Something wrong</div>
     <script>
-      process.versions.electron ? require('../dist/main') : require('./index')
+      const isDev = require('electron-is-dev')
+      isDev ? require('./index') : require('../dist/main')
     </script>
   </body>
 </html>

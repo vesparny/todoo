@@ -6,7 +6,7 @@ const updater = require('./updater')
 const mb = menubar({
   'preload-window': true,
   index: INDEX_PATH,
-  width: 650,
+  width: 600,
   height: 700,
   icon: TRAY_ICON_PATH,
   'show-dock-icon': true
@@ -43,6 +43,35 @@ const template = [{
     }
   }]
 }, {
+  label: 'Edit',
+  submenu: [{
+    label: 'Undo',
+    accelerator: 'CmdOrCtrl+Z',
+    role: 'undo'
+  }, {
+    label: 'Redo',
+    accelerator: 'Shift+CmdOrCtrl+Z',
+    role: 'redo'
+  }, {
+    type: 'separator'
+  }, {
+    label: 'Cut',
+    accelerator: 'CmdOrCtrl+X',
+    role: 'cut'
+  }, {
+    label: 'Copy',
+    accelerator: 'CmdOrCtrl+C',
+    role: 'copy'
+  }, {
+    label: 'Paste',
+    accelerator: 'CmdOrCtrl+V',
+    role: 'paste'
+  }, {
+    label: 'Select All',
+    accelerator: 'CmdOrCtrl+A',
+    role: 'selectall'
+  }]
+}, {
   label: 'Help',
   role: 'help',
   submenu: [{
@@ -73,8 +102,7 @@ const template = [{
       shell.openExternal('https://twitter.com/vesparny')
     }
   }]
-}
-]
+}]
 
 mb.on('ready', () => {
   console.log('app is ready')

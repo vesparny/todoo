@@ -1,6 +1,8 @@
 @import '../node_modules/tachyons/css/tachyons.min.css';
+@import '../node_modules/tachyons-flex/tachyons-flex.min.css';
 
 html {
+  height: 100%;
   min-height: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -8,6 +10,10 @@ html {
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
   background-color: #222;
+}
+
+body {
+  height: 100%;
 }
 
 .task-form__input {
@@ -28,8 +34,11 @@ html {
 }
 
 .task-list {
+  height: calc(100vh - 220px);
   border-top: 1px dotted #666;
 }
+
+.task-list::-webkit-scrollbar { width: 0 !important }
 
 .task-item {
   font-size: 1.5rem;
@@ -68,7 +77,6 @@ html {
   -ms-flex: 1;
   flex: 1;
   padding: 15px 0px;
-  overflow: hidden;
 }
 
 .cell:first-child, .cell:last-child {
@@ -97,7 +105,6 @@ html {
   padding: 3px 0 0;
   width: 40px;
   height: 40px;
-  overflow: hidden;
   background: #2a2a2a
 }
 
@@ -139,7 +146,7 @@ html {
 }
 
 .task-filters {
-  margin-bottom: 55px;
+  margin-bottom: 25px;
   margin-top: 25px;
   padding-left: 1px;
   font-size: 1rem;
@@ -186,4 +193,18 @@ html {
   font-size: 2rem;
   color: #fff;
   margin-top: 100px;
+}
+
+.move-enter {
+  -webkit-animation: fadeIn .3s;
+  animation: fadeIn .3s;
+}
+
+.move-leave {
+  visibility: hidden;
+}
+
+@-webkit-keyframes fadeIn {
+  from {  opacity: 0; }
+  to {opacity: 1; }
 }

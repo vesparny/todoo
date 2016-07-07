@@ -19,9 +19,19 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
   }
 }
 
+const currentPage = (state = 'home', action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_PAGE':
+      return action.payload.currentPage
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
   todos,
-  visibilityFilter
+  visibilityFilter,
+  currentPage
 })
 
 // selectors
