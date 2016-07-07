@@ -1,32 +1,13 @@
 import { connect } from 'react-redux'
-import { createSelector } from 'reselect'
 import TodoList from '../components/TodoList'
+import { getVisibleTodos } from '../reducers'
 
-const getVisibilityFilter = (state) => state.visibilityFilter
-const getTodos = (state) => state.todos
-
-const getVisibleTodos = createSelector(
-  [getTodos, getVisibilityFilter],
-  (todos, filter) => {
-    switch (filter) {
-      case 'SHOW_ALL':
-        return [...todos].reverse()
-      case 'SHOW_COMPLETED':
-        return todos.filter(t => t.completed).reverse()
-      case 'SHOW_ACTIVE':
-        return todos.filter(t => !t.completed).reverse()
-    }
-  }
-
-)
-const mapStateToProps = (state) => {
+const selector = (state) => {
   return {
     todos: getVisibleTodos(state)
   }
 }
 
-const VisibleTodoList = connect(
-  mapStateToProps
-)(TodoList)
+const VisibleTodoList = connect(selector)(TodoList)
 
 export default VisibleTodoList

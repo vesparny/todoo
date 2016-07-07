@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react'
 import cx from 'classnames'
+import { setVisibilityFilter } from '../actions'
 
-const Link = ({ active, children, onClick }) => {
+const Link = ({ active, filter, children, dispatch }) => {
   return (
     <a href='#'
       className={cx({active: active})}
       onClick={(e) => {
         e.preventDefault()
-        onClick()
+        dispatch(setVisibilityFilter(filter))
       }}
     >
       {children}
@@ -16,9 +17,10 @@ const Link = ({ active, children, onClick }) => {
 }
 
 Link.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired
+  filter: PropTypes.string.isRequired
 }
 
 export default Link

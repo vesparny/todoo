@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { createSelector } from 'reselect'
 
 const todos = (state = [], action) => {
   switch (action.type) {
@@ -18,9 +19,28 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
   }
 }
 
-const todoApp = combineReducers({
+const reducer = combineReducers({
   todos,
   visibilityFilter
 })
 
-export default todoApp
+// selectors
+
+const getVisibilityFilter = (state) => state.visibilityFilter
+const getTodos = (state) => state.todos
+
+export default reducer
+
+export const getVisibleTodos = createSelector(
+  [getTodos, getVisibilityFilter],
+  (todos, filter) => {
+    switch (filter) {
+      case 'SHOW_ALL':
+        return [...todos].reverse()
+      case 'SHOW_COMPLETED':
+        return todos.filter(t => t.completed).reverse()
+      case 'SHOW_ACTIVE':
+        return todos.filter(t => !t.completed).reverse()
+    }
+  }
+)
