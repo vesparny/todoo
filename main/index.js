@@ -26,7 +26,7 @@ const template = [{
       if (focusedWindow) focusedWindow.reload()
     }
   }, {
-    label: 'Preferance',
+    label: 'Preferences...',
     accelerator: 'Command+,',
     click: () => {
       mb.window.webContents.send('open-preferences')
