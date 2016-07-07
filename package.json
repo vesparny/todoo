@@ -2,8 +2,8 @@
   "name": "todoo",
   "productName": "Todoo",
   "private": true,
-  "version": "0.0.2",
-  "description": "Todo list for introverts",
+  "version": "1.0.0",
+  "description": "Todos for introverts",
   "author": "Alessandro Arnodo <alessandro@arnodo.net> (https://alessandro.arnodo.net)",
   "license": "MIT",
   "bugs": {
@@ -15,8 +15,11 @@
     "start": "electron .",
     "test": "npm run lint",
     "lint": "standard",
+    "pack-all": "npm run build && npm run pack-mac && npm run pack-win && npm run pack-linux && node script/release.js",
     "build": "cross-env NODE_ENV=production webpack -p",
-    "pack-darwin": "npm run build && electron-packager . --asar --overwrite --platform=darwin --arch=x64 --icon=static/app-icon.icns --prune=true --out=out"
+    "pack-mac": "electron-packager . --asar --overwrite --platform=darwin --arch=x64 --icon=static/app-icon.icns --prune=true --out=out --app-version=$npm_package_version",
+    "pack-win": "electron-packager . Todoo --asar --overwrite --platform=win32 --arch=ia32 --icon=astatic/app-icon.ico --prune=true --out=out --version-string.CompanyName='Alessandro Arnodo' --version-string.FileDescription='Todos for introverts' --version-string.ProductName='Todos for introverts'",
+    "pack-linux": "electron-packager . --asar --overwrite --platform=linux --arch=x64 --icon=astatic/app-icon.png--prune=true --out=out"
   },
   "dependencies": {
     "application-config-path": "0.1.0",
@@ -32,7 +35,10 @@
     "react-redux": "4.4.5",
     "redux": "3.5.2",
     "redux-thunk": "2.1.0",
+    "request": "2.72.0",
     "reselect": "2.5.3",
+    "semver": "5.2.0",
+    "superagent": "2.0.0",
     "tachyons": "4.0.1"
   },
   "devDependencies": {
