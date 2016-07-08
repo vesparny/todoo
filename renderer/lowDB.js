@@ -25,7 +25,7 @@ let todos = null
 export function init () {
   let todosPath = path.join(cfgPath, 'todos.json')
   settings = low(settingsPath, { storage })
-  if (!settings.get('todosPath').value) {
+  if (!settings.get('todosPath').value()) {
     todosPath = settings.set('todosPath', todosPath).value()
   }
   todos = low(todosPath, { storage })
