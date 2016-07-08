@@ -1,8 +1,15 @@
+console.time('init')
+
 const menubar = require('menubar')
 const { Menu, shell, dialog } = require('electron')
 const { INDEX_PATH, TRAY_ICON_PATH } = require('./constants')
 const updater = require('./updater')
 const createMenuTemplate = require('./menuTemplate')
+
+process.on('uncaughtException', function (err) {
+  dialog.showErrorBox('Uncaught Exception: ' + err.message, err.stack || '')
+  mb.app.quit()
+})
 
 const mb = menubar({
   'preload-window': true,
@@ -31,4 +38,10 @@ mb.on('ready', () => {
       shell.openExternal('https://github.com/vesparny/todoo/releases')
     }
   })
+  mb.showWindow()
+  console.timeEnd('init')
+})
+
+mb.on('after-create-window', () => {
+  console.log('window')
 })
