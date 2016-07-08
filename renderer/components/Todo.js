@@ -61,7 +61,7 @@ class Todo extends Component {
     const { editing } = this.state
     return (
       <div
-        className={cx('task-item', { 'task-item--completed': completed })}
+        className={cx('task-item', { 'task-item--completed': completed, 'task-item--editing': editing })}
       >
         <div className='cell'>
           <button onClick={onToggle} className={cx({'dn': editing, 'task-item__button': true})} type='button'>
