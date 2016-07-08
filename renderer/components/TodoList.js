@@ -1,28 +1,56 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import Todo from './Todo'
 import { editTodo, deleteTodo } from '../actions'
+import { AutoSizer, VirtualScroll } from 'react-virtualized'
 
-const TodoList = ({ todos, dispatch }) => {
-  if (!todos || todos.length === 0) {
+class TodoList extends Component {
+  constructor (props) {
+    super(props)
+    this._rowRenderer = this._rowRenderer.bind(this)
+  }
+
+  _rowRenderer ({index}) {
+    const { todos, dispatch } = this.props
+    const todo = todos[index]
     return (
-      <div className='task-list-empty'>
-        <div>Nothing to show here 👌</div>
+      <Todo
+        key={todo.id}
+        {...todo}
+        onToggle={() => dispatch(editTodo({...todo, ...{completed: !todo.completed}}))}
+        onEdit={(text) => dispatch(editTodo({...todo, ...{text}}))}
+        onDelete={() => dispatch(deleteTodo(todo))}
+      />
+
+    )
+  }
+
+  render () {
+    const { todos } = this.props
+    if (!todos || todos.length === 0) {
+      return (
+        <div className='task-list-empty'>
+          <div>Nothing to show here 👌</div>
+        </div>
+      )
+    }
+    return (
+      <div className='task-list overflow-scroll'>
+        <AutoSizer>
+          {({ width, height }) => (
+            <VirtualScroll
+              height={height}
+              overscanRowCount={0}
+              rowCount={todos.length}
+              rowHeight={() => 60}
+              rowRenderer={this._rowRenderer}
+              width={width}
+            />
+          )}
+        </AutoSizer>
       </div>
     )
   }
-  return (
-    <div className='task-list overflow-scroll'>
-      {todos.map(todo =>
-        <Todo
-          key={todo.id}
-          {...todo}
-          onToggle={() => dispatch(editTodo({...todo, ...{completed: !todo.completed}}))}
-          onEdit={(text) => dispatch(editTodo({...todo, ...{text}}))}
-          onDelete={() => dispatch(deleteTodo(todo))}
-        />
-      )}
-    </div>
-  )
+
 }
 
 TodoList.propTypes = {
