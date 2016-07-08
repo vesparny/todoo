@@ -22,7 +22,7 @@ class App extends Component {
 
   render () {
     return (
-      <div className='h-100 center w-100 pa4 overflow-hidden'>
+      <div className='h-100 center w-100 pt4 pr4 pl4 overflow-hidden'>
         <ReactCSSTransitionGroup transitionName='move' transitionEnterTimeout={300} transitionLeaveTimeout={300}>
           {this.renderPage()}
         </ReactCSSTransitionGroup>

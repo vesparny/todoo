@@ -34,7 +34,7 @@ body {
 }
 
 .task-list {
-  height: calc(100vh - 220px);
+  height: calc(100vh - 180px);
   border-top: 1px dotted #666;
 }
 
@@ -125,6 +125,7 @@ body {
 .icon--active, .task-item__button:hover .icon--active {
     fill: #85bf6b;
 }
+
 .icon {
   fill: #555;
   width: 25px;
@@ -133,6 +134,11 @@ body {
   -ms-transform: translate(0);
   transform: translate(0);
 }
+
+.task-item__button.menu .icon {
+  fill: #85bf6b;
+}
+
 
 .task-item__button:hover {
   cursor: pointer;
