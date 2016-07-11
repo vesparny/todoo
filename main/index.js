@@ -40,7 +40,7 @@ const mb = menubar({
   width: 600,
   height: 700,
   icon: TRAY_ICON_PATH,
-  'show-dock-icon': false
+  'show-dock-icon': true
 })
 
 mb.on('ready', () => {
@@ -53,10 +53,14 @@ mb.on('ready', () => {
   console.timeEnd('init')
 })
 
-mb.on('after-create-window', () => {
-  console.log('window')
-})
-
 mb.app.on('will-quit', function () {
   globalShortcut.unregisterAll()
+})
+
+mb.app.on('activate', function () {
+  mb.showWindow()
+})
+
+mb.app.on('browser-window-focus', function () {
+  mb.showWindow()
 })
