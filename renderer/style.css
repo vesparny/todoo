@@ -1,7 +1,7 @@
 @import '../node_modules/react-virtualized/styles.css';
 @import '../node_modules/tachyons/css/tachyons.min.css';
 @import '../node_modules/tachyons-flex/tachyons-flex.min.css';
-
+@import '../node_modules/normalize.css/normalize.css';
 html {
   height: 100%;
   min-height: 100%;
@@ -11,7 +11,7 @@ html {
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
   background-color: #222;
-  font-family: Helvetica Neue, Arial, sans-serif
+  font-family: Helvetica, Arial, sans-serif;
 }
 body {
   height: 100%;
@@ -33,10 +33,10 @@ body {
   -webkit-font-smoothing: antialiased
 }
 .task-list {
-  height: calc(100vh - 180px);
+  height: calc(100vh - 205px);
   border-top: 1px dotted #666;
+  padding: 20px
 }
-
 .task-item {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -133,9 +133,6 @@ body {
   -ms-transform: translate(0);
   transform: translate(0);
 }
-.task-item__button.menu .icon {
-  fill: #85bf6b;
-}
 .task-item__button:hover {
   cursor: pointer;
 }
@@ -205,4 +202,21 @@ body {
   to {
     opacity: 1;
   }
+}
+.Grid.VirtualScroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.Grid.VirtualScroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #aaa;
+}
+.Grid.VirtualScroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: -webkit-linear-gradient(left, #ddd, #aaa);
+  border: 1px solid #aaa;
+}
+.Grid.VirtualScroll:focus {
+  outline: none
 }

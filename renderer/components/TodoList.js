@@ -34,8 +34,8 @@ class TodoList extends Component {
       )
     }
     return (
-      <div className='task-list overflow-scroll'>
-        <AutoSizer>
+      <div className='task-list'>
+        <AutoSizer disableWidth>
           {({ width, height }) => (
             <VirtualScroll
               height={height}
