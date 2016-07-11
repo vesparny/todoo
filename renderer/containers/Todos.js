@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import Filters from '../components/Filters'
+import Filters from './Filters'
 import Header from '../components/Header'
 import AddTodo from './AddTodo'
 import VisibleTodoList from './VisibleTodoList'

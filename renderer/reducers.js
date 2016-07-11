@@ -54,3 +54,14 @@ export const getVisibleTodos = createSelector(
     }
   }
 )
+
+export const getSizesByType = createSelector(
+  [getTodos],
+  (todos) => {
+    return {
+      all: todos.length,
+      active: todos.filter((todo) => !todo.completed).length,
+      completed: todos.filter((todo) => todo.completed).length
+    }
+  }
+)

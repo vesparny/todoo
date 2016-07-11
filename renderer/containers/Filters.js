@@ -1,24 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import FilterLink from '../containers/FilterLink'
+import { getSizesByType } from '../reducers'
 
-const Filters = () => (
+const Filters = ({all, active, completed}) => (
   <ul className='task-filters cf'>
     <li>
       <FilterLink filter='SHOW_ALL'>
-        View All
+        View All ({all})
       </FilterLink>
     </li>
     <li>
       <FilterLink filter='SHOW_ACTIVE'>
-        Active
+        Active ({active})
       </FilterLink>
     </li>
     <li>
       <FilterLink filter='SHOW_COMPLETED'>
-        Completed
+        Completed ({completed})
       </FilterLink>
     </li>
   </ul>
 )
 
-export default Filters
+export default connect(getSizesByType)(Filters)
