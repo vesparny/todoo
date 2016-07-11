@@ -35,7 +35,6 @@ body {
 .task-list {
   height: calc(100vh - 205px);
   border-top: 1px dotted #666;
-  padding: 20px
 }
 .task-item {
   display: -webkit-flex;
@@ -219,4 +218,8 @@ body {
 }
 .Grid.VirtualScroll:focus {
   outline: none
+}
+
+.Grid {
+  padding: 20px;
 }
