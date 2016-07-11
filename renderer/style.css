@@ -12,6 +12,10 @@ html {
   font-size: 16px;
   background-color: #222;
   font-family: Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 body {
   height: 100%;
@@ -221,5 +225,5 @@ body {
 }
 
 .Grid {
-  padding: 20px;
+  padding: 0 15px 0 0;
 }
