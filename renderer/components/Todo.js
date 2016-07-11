@@ -36,6 +36,7 @@ class Todo extends Component {
         className='task-item__title  w-100'
         tabIndex='0'
         onDoubleClick={this.onEdit}
+        title={text}
       >
         {text}
       </div>
