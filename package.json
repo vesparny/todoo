@@ -3,7 +3,7 @@
   "productName": "Todoo",
   "private": true,
   "version": "1.1.0",
-  "description": "Todos for introverts",
+  "description": "Todo app for introverts",
   "author": "Alessandro Arnodo <alessandro@arnodo.net> (https://alessandro.arnodo.net)",
   "license": "MIT",
   "bugs": {
@@ -18,12 +18,13 @@
     "pack-all": "npm run build && npm run pack-mac && npm run pack-win && npm run pack-linux && node script/release.js",
     "build": "cross-env NODE_ENV=production webpack -p",
     "pack-mac": "electron-packager . --asar --overwrite --platform=darwin --arch=x64 --icon=static/app-icon.icns --prune=true --out=out --app-version=$npm_package_version",
-    "pack-win": "electron-packager . Todoo --asar --overwrite --platform=win32 --arch=ia32 --icon=astatic/app-icon.ico --prune=true --out=out --version-string.CompanyName='Alessandro Arnodo' --version-string.FileDescription='Todos for introverts' --version-string.ProductName='Todos for introverts'",
+    "pack-win": "electron-packager . Todoo --asar --overwrite --platform=win32 --arch=ia32 --icon=astatic/app-icon.ico --prune=true --out=out --version-string.CompanyName='Alessandro Arnodo' --version-string.FileDescription='Todo app for introverts' --version-string.ProductName='Todo app for introverts'",
     "pack-linux": "electron-packager . --asar --overwrite --platform=linux --arch=x64 --icon=astatic/app-icon.png--prune=true --out=out",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
     "application-config-path": "0.1.0",
+    "autolinker": "0.27.0",
     "classnames": "2.2.5",
     "cuid": "1.3.8",
     "electron-is-dev": "0.1.1",
@@ -39,6 +40,7 @@
     "react-redux": "4.4.5",
     "react-virtualized": "7.12.1",
     "redux": "3.5.2",
+    "redux-logger": "2.6.1",
     "redux-thunk": "2.1.0",
     "request": "2.73.0",
     "reselect": "2.5.3",

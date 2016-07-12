@@ -10,6 +10,15 @@ const todos = (state = [], action) => {
   }
 }
 
+const settings = (state = {}, action) => {
+  switch (action.type) {
+    case 'SETTINGS_LOADED':
+      return {...state, ...action.payload}
+    default:
+      return state
+  }
+}
+
 const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
@@ -30,6 +39,7 @@ const currentPage = (state = 'home', action) => {
 
 const reducer = combineReducers({
   todos,
+  settings,
   visibilityFilter,
   currentPage
 })

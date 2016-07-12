@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
+import autolinker from 'autolinker'
 
 class Todo extends Component {
   constructor (props) {
@@ -31,14 +32,15 @@ class Todo extends Component {
   }
 
   renderNotEditable (text) {
+    const autolinked = autolinker.link(text)
     return (
       <div
         className='task-item__title  w-100'
         tabIndex='0'
         onDoubleClick={this.onEdit}
         title={text}
+        dangerouslySetInnerHTML={{__html: autolinked}}
       >
-        {text}
       </div>
     )
   }

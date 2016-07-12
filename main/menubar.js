@@ -1,5 +1,5 @@
 const menubar = require('menubar')
-const { INDEX_PATH, TRAY_ICON_PATH } = require('./constants')
+const { INDEX_PATH, TRAY_ICON_PATH } = require('../constants')
 
 const mb = menubar({
   'preloadWindow': true,

@@ -3,14 +3,20 @@ console.time('init')
 const menubar = require('./menubar')
 const { Menu, shell, dialog, globalShortcut } = require('electron')
 const updater = require('./updater')
+const { SHORTCUT } = require('../constants')
 const createMenuTemplate = require('./menuTemplate')
 const bindIpcMain = require('./ipc')
 const log = require('./log')
 
+function openExternal (e, url) {
+  e.preventDefault()
+  shell.openExternal(url)
+}
+
 function registerGlobalShortcut (accelerator, mb) {
   globalShortcut.unregisterAll()
   globalShortcut.register(accelerator, () => {
-    mb.window.isVisible() ? mb.hideWindow() : mb.showWindow()
+    menubar.window.isVisible() ? menubar.hideWindow() : menubar.showWindow()
   })
 }
 
@@ -44,8 +50,11 @@ menubar.on('ready', () => {
   const menu = Menu.buildFromTemplate(createMenuTemplate(menubar, shell))
   Menu.setApplicationMenu(menu)
   checkForUpdates()
-  registerGlobalShortcut('control+shift+space')
+  registerGlobalShortcut(SHORTCUT)
   menubar.showWindow()
+
+  menubar.window.webContents.on('new-window', openExternal)
+  menubar.window.webContents.on('will-navigate', openExternal)
 })
 
 menubar.app.on('will-quit', function () {

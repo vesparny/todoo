@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h4 align="center">Todos for introverts</h4>
+<h4 align="center">Todo app for introverts</h4>
 <h4 align="center">For OS X, Windows and Linux</h4>
 <h5 align="center">Built with Electron and React + Redux</h5>
 
