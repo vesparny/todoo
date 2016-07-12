@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { remote } from 'electron'
-import { moveSync } from 'fs-plus'
+import { copyFileSync, removeSync } from 'fs-plus'
 import path from 'path'
 import { setCurrentPage, updateSettings } from '../actions'
 import Header from '../components/Header'
@@ -25,6 +25,8 @@ const style = {
     color: '#dcdcdc'
   },
   input: {
+    outline: 'none',
+    width: '90%',
     color: '#999',
     border: '1px solid #181a1f',
     backgroundColor: '#1b1d23'
@@ -32,7 +34,7 @@ const style = {
   },
   label: {
     fontSize: '1.3rem',
-    color: '#999'
+    color: '#fff'
   }
 }
 
@@ -46,7 +48,8 @@ class Settings extends Component {
     dialog.showOpenDialog(remote.getCurrentWindow(), dialogOptions, (filenames) => {
       if (!Array.isArray(filenames)) return
       try {
-        moveSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
+        copyFileSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
+        removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
         this.props.dispatch(updateSettings({
           todooJsonDir: filenames[0]
         }))
@@ -81,11 +84,12 @@ class Settings extends Component {
             </label>
             <div className='df flx-aic'>
               <input
-                className='db pa2 w-80'
+                className='db pa2'
                 style={style.input}
                 type='text'
-                disabled='disabled'
+                readonly='readonly'
                 id='todooJsonDir'
+                onClick={this.openDialog}
                 value={this.props.todooJsonDir} />
               <button onClick={this.openDialog} className='task-item__button' type='button' key='bs'>
                 <svg className='icon' fill='#000000' height='24' viewBox='0 0 24 24' width='24'>
@@ -104,7 +108,7 @@ class Settings extends Component {
             </label>
             <div className='df flx-aic'>
               <input
-                className='db pa2 w-80'
+                className='db pa2'
                 style={style.input}
                 type='text'
                 disabled='disabled'
