@@ -34,9 +34,10 @@ Please note that binaries are not signed. If you need them to be signed you can 
 
 ## Features
 
-* Todos stored locally (because pricavy matters, your data is your data)
-* Emoji Support
-* Always available in your Tray
+* Todos stored locally (because privacy matters, your data is yours and only yours)
+* Place the todoo.json anywhere you want (For instance you can put it in your Dropbox folder or even better in a [Cryptomator](https://cryptomator.org/) vault)
+* Always available right in the system tray (Windows/Linux) or menu bar (Mac)
+* Global shortcut to open the app window (`control+shift+space`)
 
 ## Technologies used
 
