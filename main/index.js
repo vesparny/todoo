@@ -35,12 +35,12 @@ process.on('uncaughtException', function (err) {
 })
 
 const mb = menubar({
-  'preload-window': true,
+  'preloadWindow': true,
   index: INDEX_PATH,
   width: 600,
   height: 700,
   icon: TRAY_ICON_PATH,
-  'show-dock-icon': true
+  'showDockIcon': true
 })
 
 mb.on('ready', () => {
