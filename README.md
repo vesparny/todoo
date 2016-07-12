@@ -39,18 +39,16 @@ Please note that binaries are not signed. If you need them to be signed you can 
 * Always available right in the system tray (Windows/Linux) or menu bar (Mac)
 * Global shortcut to open the app window (`control+shift+space`)
 
-## Technologies used
+## Tech stack
 
 * [Electron](https://github.com/electron/electron)
 * [React](https://facebook.github.io/react/)
 * [Redux](https://github.com/reactjs/redux/)
 * [Lowdb](https://github.com/typicode/lowdb)
 
-
 ## Roadmap
 
 Refer to open [issues](https://github.com/vesparny/todoo/issues). Also feel free to propose features and report bugs.
-
 
 ## Development
 
@@ -70,7 +68,7 @@ $ npm run dev
 
 ### Package app
 
-Builds app binaries for OS X, Linux, and Windows.
+Build app binaries for OS X, Linux, and Windows.
 
 ```bash
 $ npm run pack-all
