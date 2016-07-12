@@ -1,114 +1,26 @@
-const menubar = require('menubar')
-const { Menu, shell, dialog } = require('electron')
-const { INDEX_PATH, TRAY_ICON_PATH } = require('./constants')
+console.time('init')
+
+const menubar = require('./menubar')
+const { Menu, shell, dialog, globalShortcut } = require('electron')
 const updater = require('./updater')
+const { SHORTCUT } = require('../constants')
+const createMenuTemplate = require('./menuTemplate')
+const bindIpcMain = require('./ipc')
+const log = require('./log')
 
-const mb = menubar({
-  'preload-window': true,
-  index: INDEX_PATH,
-  width: 600,
-  height: 700,
-  icon: TRAY_ICON_PATH,
-  'show-dock-icon': true
-})
+function openExternal (e, url) {
+  e.preventDefault()
+  shell.openExternal(url)
+}
 
-const template = [{
-  label: 'Todoo',
-  submenu: [{
-    label: 'About Todoo',
-    role: 'about'
-  }, {
-    type: 'separator'
-  }, {
-    label: 'Reload',
-    accelerator: 'CmdOrCtrl+R',
-    click: (item, focusedWindow) => {
-      if (focusedWindow) focusedWindow.reload()
-    }
-  }, {
-    label: 'Preferences...',
-    accelerator: 'Command+,',
-    click: () => {
-      mb.window.webContents.send('open-preferences')
-    }
-  }, {
-    label: 'Quit App',
-    accelerator: 'Command+Q',
-    selector: 'terminate:'
-  }, {
-    label: 'Toggle DevTools',
-    accelerator: 'Alt+Command+I',
-    click: () => {
-      mb.window.toggleDevTools()
-    }
-  }]
-}, {
-  label: 'Edit',
-  submenu: [{
-    label: 'Undo',
-    accelerator: 'CmdOrCtrl+Z',
-    role: 'undo'
-  }, {
-    label: 'Redo',
-    accelerator: 'Shift+CmdOrCtrl+Z',
-    role: 'redo'
-  }, {
-    type: 'separator'
-  }, {
-    label: 'Cut',
-    accelerator: 'CmdOrCtrl+X',
-    role: 'cut'
-  }, {
-    label: 'Copy',
-    accelerator: 'CmdOrCtrl+C',
-    role: 'copy'
-  }, {
-    label: 'Paste',
-    accelerator: 'CmdOrCtrl+V',
-    role: 'paste'
-  }, {
-    label: 'Select All',
-    accelerator: 'CmdOrCtrl+A',
-    role: 'selectall'
-  }]
-}, {
-  label: 'Help',
-  role: 'help',
-  submenu: [{
-    label: 'Learn More',
-    click: () => {
-      shell.openExternal('https://github.com/vesparny/todoo#readme')
-    }
-  }, {
-    label: 'Report Issue',
-    click: () => {
-      shell.openExternal('https://github.com/vesparny/todoo/issues')
-    }
-  }, {
-    label: 'Source Code on GitHub',
-    click: () => {
-      shell.openExternal('https://github.com/vesparny/todoo')
-    }
-  }, {
-    label: 'Changelog',
-    click: () => {
-      shell.openExternal('https://github.com/vesparny/todoo/blob/master/CHANGELOG.md')
-    }
-  }, {
-    type: 'separator'
-  }, {
-    label: 'Follow @vesparny on Twitter',
-    click: () => {
-      shell.openExternal('https://twitter.com/vesparny')
-    }
-  }]
-}]
+function registerGlobalShortcut (accelerator, mb) {
+  globalShortcut.unregisterAll()
+  globalShortcut.register(accelerator, () => {
+    menubar.window.isVisible() ? menubar.hideWindow() : menubar.showWindow()
+  })
+}
 
-mb.on('ready', () => {
-  console.log('app is ready')
-  const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
-
+function checkForUpdates () {
   updater((err, newVersion) => {
     if (err) return
     const confirm = dialog.showMessageBox({
@@ -122,4 +34,42 @@ mb.on('ready', () => {
       shell.openExternal('https://github.com/vesparny/todoo/releases')
     }
   })
+}
+
+process.on('uncaughtException', function (err) {
+  dialog.showErrorBox('Uncaught Exception: ' + err.message, err.stack || '')
+  menubar.app.quit()
+})
+
+menubar.app.ipcReady = false
+
+bindIpcMain()
+
+menubar.on('ready', () => {
+  log('App is ready')
+  const menu = Menu.buildFromTemplate(createMenuTemplate(menubar, shell))
+  Menu.setApplicationMenu(menu)
+  checkForUpdates()
+  registerGlobalShortcut(SHORTCUT)
+  menubar.showWindow()
+
+  menubar.window.webContents.on('new-window', openExternal)
+  menubar.window.webContents.on('will-navigate', openExternal)
+})
+
+menubar.app.on('will-quit', function () {
+  globalShortcut.unregisterAll()
+})
+
+menubar.app.on('activate', function () {
+  menubar.showWindow()
+})
+
+menubar.app.on('browser-window-focus', function () {
+  menubar.showWindow()
+})
+
+menubar.app.once('ipcReady', function () {
+  log('ipcReady event received from renderer process')
+  console.timeEnd('init')
 })

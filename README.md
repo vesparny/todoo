@@ -1,13 +1,13 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/vesparny/todoo"><img src="https://cloud.githubusercontent.com/assets/82070/16671208/7d8e676c-449e-11e6-87b2-b2f0d9da8e00.png" alt="todoo" width="200"></a>
+  <a href="https://github.com/vesparny/todoo"><img src="https://cloud.githubusercontent.com/assets/82070/16784974/bfc2d460-488b-11e6-9024-14d86505ba57.png" alt="todoo" width="200"></a>
   <br>
   Todoo
   <br>
   <br>
 </h1>
 
-<h4 align="center">Todos for introverts</h4>
+<h4 align="center">Todo app for introverts</h4>
 <h4 align="center">For OS X, Windows and Linux</h4>
 <h5 align="center">Built with Electron and React + Redux</h5>
 
@@ -20,36 +20,41 @@
   <a href="https://david-dm.org/vesparny/todoo#info=devDependencies"><img src="https://david-dm.org/vesparny/todoo/dev-status.svg" alt="Dev dependency status"></a>
 </p>
 
-## Install
-
-**Todoo** is still under development.
+## Download
 
 **You can download the latest version from the [releases](https://github.com/vesparny/todoo/releases) page.**
 
 Please note that binaries are not signed. If you need them to be signed you can easily do it with your own certificates.
 
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/82070/16650965/2e0d48a0-4441-11e6-84ba-75e103b234c4.gif" style="max-width:100%" alt="screenshot" align="center">
+  <img src="https://cloud.githubusercontent.com/assets/82070/16784967/b3d9ed3c-488b-11e6-949a-d0c1f9e25f2a.gif" style="max-width:100%" alt="screenshot" align="center">
 </p>
+
+## Motivations
+
+I know there is plenty of cool todo apps like Wunderlist or the like, but I wanted something privacy aware, because I do not like to share my personal todo list with big companies
+
+Todoo works storing todos on a plain-old json file and allows you to configure its path.
+
+This way you are free to move it inside your Dropbox folder if you like, or even better inside a  [Cryptomator](https://cryptomator.org/) vault 👌.
 
 ## Features
 
-* Todos stored locally (because pricavy matters, your data is your data)
-* Emoji Support
-* Always available in your Tray
+* Todos stored locally (because privacy matters, your data is yours and only yours)
+* Place the todoo.json anywhere you want
+* Always available right in the system tray (Windows/Linux) or menu bar (Mac)
+* Global shortcut to open the app window (`control+shift+space`)
 
-## Technologies used
+## Tech stack
 
-* [electron](https://github.com/electron/electron)
+* [Electron](https://github.com/electron/electron)
 * [React](https://facebook.github.io/react/)
 * [Redux](https://github.com/reactjs/redux/)
 * [Lowdb](https://github.com/typicode/lowdb)
 
-
 ## Roadmap
 
 Refer to open [issues](https://github.com/vesparny/todoo/issues). Also feel free to propose features and report bugs.
-
 
 ## Development
 
@@ -69,7 +74,7 @@ $ npm run dev
 
 ### Package app
 
-Builds app binaries for OS X, Linux, and Windows.
+Build app binaries for OS X, Linux, and Windows.
 
 ```bash
 $ npm run pack-all

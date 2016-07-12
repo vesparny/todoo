@@ -1,16 +1,16 @@
 const semver = require('semver')
-const request = require('superagent')
+const request = require('request')
 const pkg = require('../package.json')
 
 module.exports = function updater (callback) {
-  request
-    .get('https://raw.githubusercontent.com/vesparny/todoo/master/package.json')
-    .end((err, res) => {
-      if (err || !res.ok) {
+  request(
+    'https://raw.githubusercontent.com/vesparny/todoo/master/package.json',
+    (err, res, body) => {
+      if (!err && res.statusCode !== 200) {
         callback(err)
       } else {
         try {
-          const newVersion = JSON.parse(res.text).version
+          const newVersion = JSON.parse(body).version
           if (semver.gt(newVersion, pkg.version)) {
             callback(null, newVersion)
           } else {
@@ -20,5 +20,6 @@ module.exports = function updater (callback) {
           callback(err)
         }
       }
-    })
+    }
+  )
 }

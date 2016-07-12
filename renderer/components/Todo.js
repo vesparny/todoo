@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
+import autolinker from 'autolinker'
 
 class Todo extends Component {
   constructor (props) {
@@ -31,13 +32,15 @@ class Todo extends Component {
   }
 
   renderNotEditable (text) {
+    const autolinked = autolinker.link(text)
     return (
       <div
         className='task-item__title  w-100'
         tabIndex='0'
         onDoubleClick={this.onEdit}
+        title={text}
+        dangerouslySetInnerHTML={{__html: autolinked}}
       >
-        {text}
       </div>
     )
   }
@@ -61,7 +64,7 @@ class Todo extends Component {
     const { editing } = this.state
     return (
       <div
-        className={cx('task-item', { 'task-item--completed': completed })}
+        className={cx('task-item', { 'task-item--completed': completed, 'task-item--editing': editing })}
       >
         <div className='cell'>
           <button onClick={onToggle} className={cx({'dn': editing, 'task-item__button': true})} type='button'>
@@ -91,7 +94,6 @@ class Todo extends Component {
 }
 
 Todo.propTypes = {
-  onClick: PropTypes.func.isRequired,
   completed: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired
 }

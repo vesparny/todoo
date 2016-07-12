@@ -10,6 +10,15 @@ const todos = (state = [], action) => {
   }
 }
 
+const settings = (state = {}, action) => {
+  switch (action.type) {
+    case 'SETTINGS_LOADED':
+      return {...state, ...action.payload}
+    default:
+      return state
+  }
+}
+
 const visibilityFilter = (state = 'SHOW_ALL', action) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER':
@@ -22,7 +31,7 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 const currentPage = (state = 'home', action) => {
   switch (action.type) {
     case 'SET_CURRENT_PAGE':
-      return action.payload.currentPage
+      return action.payload
     default:
       return state
   }
@@ -30,6 +39,7 @@ const currentPage = (state = 'home', action) => {
 
 const reducer = combineReducers({
   todos,
+  settings,
   visibilityFilter,
   currentPage
 })
@@ -51,6 +61,17 @@ export const getVisibleTodos = createSelector(
         return todos.filter(t => t.completed).reverse()
       case 'SHOW_ACTIVE':
         return todos.filter(t => !t.completed).reverse()
+    }
+  }
+)
+
+export const getSizesByType = createSelector(
+  [getTodos],
+  (todos) => {
+    return {
+      all: todos.length,
+      active: todos.filter((todo) => !todo.completed).length,
+      completed: todos.filter((todo) => todo.completed).length
     }
   }
 )

@@ -3,9 +3,33 @@ import storage from 'lowdb/lib/file-sync'
 import applicationConfigPath from 'application-config-path'
 import path from 'path'
 import cuid from 'cuid'
+import { moveSync, existsSync, removeSync } from 'fs-plus'
+import { SHORTCUT } from '../constants'
+import { version } from '../package.json'
 
 const cfgPath = applicationConfigPath('Todoo')
 const settingsPath = path.join(cfgPath, 'settings.json')
+
+function migrations () {
+  settings = low(settingsPath, { storage })
+  // from 1.1.0
+  if (!settings.get('settings').value()) {
+    if (existsSync(path.join(cfgPath, 'todos.json'))) {
+      try {
+        console.log('moving old todos.json file to new format')
+        moveSync(path.join(cfgPath, 'todos.json'), path.join(cfgPath, 'todoo.json'))
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    try {
+      console.log('removing old settings.json file')
+      removeSync(path.join(cfgPath, 'settings.json'))
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}
 
 const defaults = [{
   id: cuid(),
@@ -22,18 +46,39 @@ const defaults = [{
 let settings = null
 let todos = null
 
-export function init () {
-  let todosPath = path.join(cfgPath, 'todos.json')
+export function bootDatabase () {
+  migrations()
+  // load settings
   settings = low(settingsPath, { storage })
-  if (!settings.get('todosPath').value) {
-    todosPath = settings.set('todosPath', todosPath).value()
+  settings.defaults({
+    settings: {
+      shortcut: SHORTCUT,
+      version: version
+    }
+  }).value()
+
+  const currentSettings = selectAllSettings()
+
+  let todosDir = currentSettings.todooJsonDir
+    ? currentSettings.todooJsonDir
+    : cfgPath
+
+  let todosPath = path.join(todosDir, 'todoo.json')
+
+  if (!currentSettings.todooJsonDir) {
+    updateSett({todooJsonDir: todosDir})
   }
+
   todos = low(todosPath, { storage })
   todos.defaults({todos: defaults}).value()
 }
 
 export function selectAll () {
   return todos.get('todos').value()
+}
+
+export function selectAllSettings () {
+  return settings.get('settings').value()
 }
 
 export function create (text) {
@@ -53,6 +98,16 @@ export function update (todo) {
   .assign(todo)
   .value()
   return selectAll()
+}
+
+export function updateSett (newSettings) {
+  settings
+  .get('settings')
+  .assign(newSettings)
+  .value()
+  // ensure we reload the files, maybe not necessary
+  bootDatabase()
+  return selectAllSettings()
 }
 
 export function del (todo) {
