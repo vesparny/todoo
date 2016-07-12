@@ -19,7 +19,7 @@ body {
 }
 .task-form__input {
   height: 65px;
-  font-size: 2rem;
+  font-size: 1.6rem;
   outline: none;
   border: 0;
   border-bottom: 1px dotted #666;
@@ -109,7 +109,7 @@ body {
   outline: none;
   text-overflow: ellipsis;
 }
-.task-item--completed .task-item__title {
+.task-item--completed .task-item__title, .task-item--completed .task-item__title a {
   color: #666;
 }
 .icon--active, .task-item__button:hover .icon--active {
