@@ -40,7 +40,7 @@ Please note that binaries are not signed. If you need them to be signed you can 
 
 ## Technologies used
 
-* [electron](https://github.com/electron/electron)
+* [Electron](https://github.com/electron/electron)
 * [React](https://facebook.github.io/react/)
 * [Redux](https://github.com/reactjs/redux/)
 * [Lowdb](https://github.com/typicode/lowdb)
