@@ -20,9 +20,7 @@
   <a href="https://david-dm.org/vesparny/todoo#info=devDependencies"><img src="https://david-dm.org/vesparny/todoo/dev-status.svg" alt="Dev dependency status"></a>
 </p>
 
-## Install
-
-**Todoo** is still under development.
+## Download
 
 **You can download the latest version from the [releases](https://github.com/vesparny/todoo/releases) page.**
 

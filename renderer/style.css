@@ -1,20 +1,18 @@
 @import '../node_modules/react-virtualized/styles.css';
 @import '../node_modules/tachyons/css/tachyons.min.css';
 @import '../node_modules/tachyons-flex/tachyons-flex.min.css';
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 html {
   height: 100%;
   min-height: 100%;
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
   background-color: #222;
   font-family: Helvetica, Arial, sans-serif;
   box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
 }
 body {
   height: 100%;
@@ -58,8 +56,6 @@ body {
   padding-left: 15px;
 }
 .cell:first-child, .cell:last-child {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -69,20 +65,12 @@ body {
   align-items: center;
 }
 .cell:nth-child(2) {
-  -webkit-flex: 1;
-  -ms-flex: 1;
   flex: 1;
   overflow: hidden;
 }
 .cell:first-child, .cell:last-child {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 .task-item__button:first-child {
@@ -131,8 +119,6 @@ body {
   fill: #555;
   width: 25px;
   height: 25px;
-  -webkit-transform: translate(0);
-  -ms-transform: translate(0);
   transform: translate(0);
 }
 .task-item__button:hover {
@@ -191,7 +177,6 @@ body {
   margin-top: 100px;
 }
 .move-enter {
-  -webkit-animation: fadeIn .3s;
   animation: fadeIn .3s;
 }
 .move-leave {
