@@ -1,10 +1,11 @@
 console.time('init')
 
-const menubar = require('menubar')
+const menubar = require('./menubar')
 const { Menu, shell, dialog, globalShortcut } = require('electron')
-const { INDEX_PATH, TRAY_ICON_PATH } = require('./constants')
 const updater = require('./updater')
 const createMenuTemplate = require('./menuTemplate')
+const bindIpcMain = require('./ipc')
+const log = require('./log')
 
 function registerGlobalShortcut (accelerator, mb) {
   globalShortcut.unregisterAll()
@@ -31,36 +32,35 @@ function checkForUpdates () {
 
 process.on('uncaughtException', function (err) {
   dialog.showErrorBox('Uncaught Exception: ' + err.message, err.stack || '')
-  mb.app.quit()
+  menubar.app.quit()
 })
 
-const mb = menubar({
-  'preloadWindow': true,
-  index: INDEX_PATH,
-  width: 600,
-  height: 700,
-  icon: TRAY_ICON_PATH,
-  'showDockIcon': true
-})
+menubar.app.ipcReady = false
 
-mb.on('ready', () => {
-  console.log('app is ready')
-  const menu = Menu.buildFromTemplate(createMenuTemplate(mb, shell))
+bindIpcMain()
+
+menubar.on('ready', () => {
+  log('App is ready')
+  const menu = Menu.buildFromTemplate(createMenuTemplate(menubar, shell))
   Menu.setApplicationMenu(menu)
   checkForUpdates()
   registerGlobalShortcut('control+shift+space')
-  mb.showWindow()
-  console.timeEnd('init')
+  menubar.showWindow()
 })
 
-mb.app.on('will-quit', function () {
+menubar.app.on('will-quit', function () {
   globalShortcut.unregisterAll()
 })
 
-mb.app.on('activate', function () {
-  mb.showWindow()
+menubar.app.on('activate', function () {
+  menubar.showWindow()
 })
 
-mb.app.on('browser-window-focus', function () {
-  mb.showWindow()
+menubar.app.on('browser-window-focus', function () {
+  menubar.showWindow()
+})
+
+menubar.app.once('ipcReady', function () {
+  log('ipcReady event received from renderer process')
+  console.timeEnd('init')
 })

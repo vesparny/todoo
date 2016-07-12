@@ -45,8 +45,6 @@ export const setVisibilityFilter = (filter) => {
 export const setCurrentPage = (currentPage) => {
   return {
     type: 'SET_CURRENT_PAGE',
-    payload: {
-      currentPage
-    }
+    payload: currentPage
   }
 }

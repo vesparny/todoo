@@ -1,4 +1,3 @@
-
 module.exports = function createMenuTemplate (mb, shell) {
   return [{
     label: 'Todoo',
@@ -17,7 +16,10 @@ module.exports = function createMenuTemplate (mb, shell) {
       label: 'Preferences...',
       accelerator: 'Command+,',
       click: () => {
-        mb.window.webContents.send('open-preferences')
+        mb.window.webContents.send('dispatch', {
+          type: 'SET_CURRENT_PAGE',
+          payload: 'settings'
+        })
       }
     }, {
       label: 'Quit App',
@@ -27,7 +29,11 @@ module.exports = function createMenuTemplate (mb, shell) {
       label: 'Toggle DevTools',
       accelerator: 'Alt+Command+I',
       click: () => {
-        mb.window.toggleDevTools()
+        if (mb.window.webContents.isDevToolsOpened()) {
+          mb.window.webContents.closeDevTools()
+        } else {
+          mb.window.webContents.openDevTools()
+        }
       }
     }]
   }, {

@@ -22,7 +22,7 @@ const defaults = [{
 let settings = null
 let todos = null
 
-export function init () {
+export function bootDatabase () {
   let todosPath = path.join(cfgPath, 'todos.json')
   settings = low(settingsPath, { storage })
   if (!settings.get('todosPath').value()) {

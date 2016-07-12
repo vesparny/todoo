@@ -22,7 +22,7 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 const currentPage = (state = 'home', action) => {
   switch (action.type) {
     case 'SET_CURRENT_PAGE':
-      return action.payload.currentPage
+      return action.payload
     default:
       return state
   }
