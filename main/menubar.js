@@ -7,7 +7,7 @@ const mb = menubar({
   width: 600,
   height: 700,
   icon: TRAY_ICON_PATH,
-  'showDockIcon': true
+  'showDockIcon': false
 })
 
 module.exports = mb

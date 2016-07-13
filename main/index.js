@@ -58,6 +58,7 @@ menubar.on('ready', () => {
 })
 
 menubar.app.on('will-quit', function () {
+  console.log('app is about to quit')
   globalShortcut.unregisterAll()
 })
 

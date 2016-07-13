@@ -5,8 +5,8 @@ import Todos from './Todos'
 import Settings from './Settings'
 
 const pages = {
-  'home': <Todos key='home' />,
-  'settings': <Settings key='settings' />
+  'home': <Todos key='home' currentPage='home' />,
+  'settings': <Settings key='settings' currentPage='settings' />
 }
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
 
   render () {
     return (
-      <div className='h-100 center w-100 pt4 pr3 pl3 overflow-hidden'>
+      <div className='h-100 center w-100 pt3 pr3 pl3 overflow-hidden'>
         <ReactCSSTransitionGroup transitionName='move' transitionEnterTimeout={300} transitionLeaveTimeout={300}>
           {this.renderPage()}
         </ReactCSSTransitionGroup>
@@ -31,9 +31,9 @@ class App extends Component {
   }
 }
 
-const selector = (state) => {
+const selector = ({ currentPage }) => {
   return {
-    currentPage: state.currentPage
+    currentPage
   }
 }
 

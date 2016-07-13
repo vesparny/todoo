@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import { remote } from 'electron'
 import { copyFileSync, removeSync, existsSync } from 'fs-plus'
 import path from 'path'
-import { setCurrentPage, updateSettings, loadTodos } from '../actions'
+import { updateSettings, loadTodos } from '../actions'
 import Header from '../components/Header'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const dialog = remote.dialog
 
@@ -81,18 +80,10 @@ class Settings extends Component {
   }
 
   render () {
-    const { dispatch, todooJsonDir, version } = this.props
+    const { todooJsonDir, version, currentPage, dispatch } = this.props
     return (
       <div className='mw7 center'>
-        <Header>
-          <ReactCSSTransitionGroup transitionName='move' transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-            <button onClick={() => dispatch(setCurrentPage('home'))} className='task-item__button' type='button' key='bs'>
-              <svg className='icon' fill='#000000' height='24' viewBox='0 0 24 24' width='24'>
-                <path d='M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z' />
-              </svg>
-            </button>
-          </ReactCSSTransitionGroup>
-        </Header>
+        <Header currentPage={currentPage} dispatch={dispatch} />
         <div>
           <div className='pa2 pb3' style={style.block}>
             <label
