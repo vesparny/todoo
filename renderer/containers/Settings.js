@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { remote } from 'electron'
-import { copyFileSync, removeSync, existsSync } from 'fs-plus'
+import { copyFileSync, existsSync } from 'fs-plus'
 import path from 'path'
 import { updateSettings, loadTodos } from '../actions'
 import Header from '../components/Header'
