@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { remote } from 'electron'
-import { copyFileSync, removeSync } from 'fs-plus'
+import { copyFileSync, removeSync, existsSync } from 'fs-plus'
 import path from 'path'
-import { setCurrentPage, updateSettings } from '../actions'
+import { setCurrentPage, updateSettings, loadTodos } from '../actions'
 import Header from '../components/Header'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -33,7 +33,7 @@ const style = {
 
   },
   label: {
-    fontSize: '1.3rem',
+    fontSize: '1.1rem',
     color: '#fff'
   }
 }
@@ -48,11 +48,31 @@ class Settings extends Component {
     dialog.showOpenDialog(remote.getCurrentWindow(), dialogOptions, (filenames) => {
       if (!Array.isArray(filenames)) return
       try {
-        copyFileSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
-        removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+        if (existsSync(path.resolve(filenames[0], 'todoo.json'))) {
+          const confirm = dialog.showMessageBox({
+            type: 'info',
+            title: 'File already exists',
+            message: 'todoo.json file already exists',
+            detail: 'Do you want to overwrite it?',
+            buttons: ['Yes', 'No']
+          })
+          if (confirm === 0) {
+            console.log('overwriting existing file')
+            copyFileSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
+            removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+          } else {
+            console.log('not overwriting existing file')
+            removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+          }
+        } else {
+          console.log('move the file to a new location')
+          copyFileSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
+          removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+        }
         this.props.dispatch(updateSettings({
           todooJsonDir: filenames[0]
         }))
+        this.props.dispatch(loadTodos())
       } catch (e) {
         console.error(e)
         dialog.showErrorBox('Error', e.message || 'An error has occoured')
@@ -61,7 +81,7 @@ class Settings extends Component {
   }
 
   render () {
-    const { dispatch } = this.props
+    const { dispatch, todooJsonDir, version } = this.props
     return (
       <div className='mw7 center'>
         <Header>
@@ -80,17 +100,17 @@ class Settings extends Component {
               htmlFor='todooJsonDir'
               style={style.label}
             >
-              Change the todoo.json directory
+              Relocate todoo.json in a different directory
             </label>
             <div className='df flx-aic'>
               <input
                 className='db pa2'
                 style={style.input}
                 type='text'
-                readonly='readonly'
+                readOnly='readonly'
                 id='todooJsonDir'
                 onClick={this.openDialog}
-                value={this.props.todooJsonDir} />
+                defaultValue={todooJsonDir} />
               <button onClick={this.openDialog} className='task-item__button' type='button' key='bs'>
                 <svg className='icon' fill='#000000' height='24' viewBox='0 0 24 24' width='24'>
                   <path d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z' />
@@ -124,6 +144,9 @@ class Settings extends Component {
               About
             </label>
             <div className='pt2'>
+              <div style={style.aboutBlock}>
+                Version {version}
+              </div>
               <div style={style.aboutBlock}>
                 MIT Licensed Copyright (c) 2016-present <a style={style.link} href='http://alessandro.arnodo.net/'>Alessandro Arnodo</a>
               </div>
