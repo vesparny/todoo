@@ -52,8 +52,7 @@ export function bootDatabase () {
   settings = low(settingsPath, { storage })
   settings.defaults({
     settings: {
-      shortcut: SHORTCUT,
-      version: version
+      shortcut: SHORTCUT
     }
   }).value()
 
@@ -68,6 +67,8 @@ export function bootDatabase () {
   if (!currentSettings.todooJsonDir) {
     updateSett({todooJsonDir: todosDir})
   }
+
+  updateSett({version})
 
   todos = low(todosPath, { storage })
   todos.defaults({todos: defaults}).value()
@@ -105,9 +106,12 @@ export function updateSett (newSettings) {
   .get('settings')
   .assign(newSettings)
   .value()
-  // ensure we reload the files, maybe not necessary
-  bootDatabase()
-  return selectAllSettings()
+
+  const currentSettings = selectAllSettings()
+  let todosDir = currentSettings.todooJsonDir
+  let todosPath = path.join(todosDir, 'todoo.json')
+  todos = low(todosPath, { storage })
+  return currentSettings
 }
 
 export function del (todo) {

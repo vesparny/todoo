@@ -9,7 +9,7 @@ import createLogger from 'redux-logger'
 import todoApp from './reducers'
 import App from './containers/App'
 import { bootDatabase } from './lowDB'
-import { loadTodos, loadSettings } from './actions'
+import { loadSettings } from './actions'
 import bindIpcRenderer from './ipc'
 
 let store = createStore(
@@ -17,9 +17,7 @@ let store = createStore(
   applyMiddleware(thunk, createLogger())
 )
 
-// these steps are synchronous but it will change
 bootDatabase()
-store.dispatch(loadTodos())
 store.dispatch(loadSettings())
 
 bindIpcRenderer(store)

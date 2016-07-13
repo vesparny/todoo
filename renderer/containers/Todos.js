@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Filters from './Filters'
 import AddTodo from './AddTodo'
-import VisibleTodoList from './VisibleTodoList'
+import TodoList from '../components/TodoList'
+import { getVisibleTodos } from '../reducers'
+import { loadTodos } from '../actions'
 
-let Todos = ({dispatch, currentPage}) => {
-  return (
-    <div className='mw7 center'>
-      <AddTodo />
-      <Filters />
-      <VisibleTodoList />
-    </div>
-  )
+class Todos extends Component {
+  componentDidMount () {
+    this.props.dispatch(loadTodos())
+  }
+  render () {
+    const {dispatch, todos} = this.props
+    return (
+      <div className='mw7 center'>
+        <AddTodo />
+        <Filters />
+        <TodoList todos={todos} dispatch={dispatch} />
+      </div>
+    )
+  }
 }
-Todos = connect()(Todos)
 
-export default Todos
+const selector = (state) => {
+  return {
+    todos: getVisibleTodos(state)
+  }
+}
+
+export default connect(selector)(Todos)
