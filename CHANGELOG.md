@@ -1,3 +1,15 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/vesparny/todoo/compare/1.2.0...v1.3.0) (2016-07-13)
+
+
+### Features
+
+* **app:** add quit button and remove dock icon ([8ac11ec](https://github.com/vesparny/todoo/commit/8ac11ec))
+* **app:** give the user the ability to choose to or to not overwrite todoo.json file ([34afeed](https://github.com/vesparny/todoo/commit/34afeed))
+* **app:** hide dock ([7fb4f52](https://github.com/vesparny/todoo/commit/7fb4f52))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/vesparny/todoo/compare/1.1.0...v1.2.0) (2016-07-12)
 

@@ -2,7 +2,7 @@
   "name": "todoo",
   "productName": "Todoo",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Todo app for introverts",
   "author": "Alessandro Arnodo <alessandro@arnodo.net> (https://alessandro.arnodo.net)",
   "license": "MIT",
