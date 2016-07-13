@@ -55,6 +55,8 @@ menubar.on('ready', () => {
 
   menubar.window.webContents.on('new-window', openExternal)
   menubar.window.webContents.on('will-navigate', openExternal)
+  // https://github.com/maxogden/menubar/issues/76
+  setTimeout(() => menubar.showWindow(), 1)
 })
 
 menubar.app.on('will-quit', function () {
@@ -62,6 +64,7 @@ menubar.app.on('will-quit', function () {
   globalShortcut.unregisterAll()
 })
 
+/*
 menubar.app.on('activate', function () {
   menubar.showWindow()
 })
@@ -69,7 +72,7 @@ menubar.app.on('activate', function () {
 menubar.app.on('browser-window-focus', function () {
   menubar.showWindow()
 })
-
+*/
 menubar.app.once('ipcReady', function () {
   log('ipcReady event received from renderer process')
   console.timeEnd('init')
