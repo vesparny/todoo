@@ -4,7 +4,6 @@ import { remote } from 'electron'
 import { copyFileSync, existsSync } from 'fs-plus'
 import path from 'path'
 import { updateSettings, loadTodos } from '../actions'
-import Header from '../components/Header'
 
 const dialog = remote.dialog
 
@@ -80,10 +79,9 @@ class Settings extends Component {
   }
 
   render () {
-    const { todooJsonDir, version, currentPage, dispatch } = this.props
+    const { todooJsonDir, version } = this.props
     return (
       <div className='mw7 center'>
-        <Header currentPage={currentPage} dispatch={dispatch} />
         <div>
           <div className='pa2 pb3' style={style.block}>
             <label

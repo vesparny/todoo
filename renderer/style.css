@@ -186,7 +186,7 @@ a {
   animation: fadeIn .3s;
 }
 .move-leave {
-  visibility: hidden;
+  display: none;
 }
 @-webkit-keyframes fadeIn {
   from {

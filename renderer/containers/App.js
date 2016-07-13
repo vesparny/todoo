@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Todos from './Todos'
 import Settings from './Settings'
+import Header from '../components/Header'
 
 const pages = {
   home: <Todos key='home' currentPage='home' />,
@@ -21,9 +22,11 @@ class App extends Component {
   }
 
   render () {
+    const { currentPage, dispatch } = this.props
     return (
       <div className='h-100 center w-100 pt3 pr3 pl3 overflow-hidden'>
         <ReactCSSTransitionGroup transitionName='move' transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+          <Header currentPage={currentPage} dispatch={dispatch} />
           {this.renderPage()}
         </ReactCSSTransitionGroup>
       </div>
