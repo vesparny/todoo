@@ -1,3 +1,15 @@
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/vesparny/todoo/compare/1.3.0...v1.4.0) (2016-07-13)
+
+
+### Bug Fixes
+
+* **app:** fix version number in preferences  ([7581571](https://github.com/vesparny/todoo/commit/7581571))
+* **app:** never remove file ([4c75b7e](https://github.com/vesparny/todoo/commit/4c75b7e))
+* **style:** css transition flickering ([a7322f5](https://github.com/vesparny/todoo/commit/a7322f5))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/vesparny/todoo/compare/1.2.0...v1.3.0) (2016-07-13)
 
