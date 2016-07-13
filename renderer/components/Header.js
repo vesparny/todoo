@@ -22,7 +22,6 @@ function renderRightButton (currentPage, dispatch) {
       </button>
     )
   }
-  return <div>ciao</div>
 }
 
 function quit () {

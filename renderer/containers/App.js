@@ -5,8 +5,8 @@ import Todos from './Todos'
 import Settings from './Settings'
 
 const pages = {
-  'home': <Todos key='home' currentPage='home' />,
-  'settings': <Settings key='settings' currentPage='settings' />
+  home: <Todos key='home' currentPage='home' />,
+  settings: <Settings key='settings' currentPage='settings' />
 }
 
 class App extends Component {
