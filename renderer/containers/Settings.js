@@ -58,15 +58,15 @@ class Settings extends Component {
           if (confirm === 0) {
             console.log('overwriting existing file')
             copyFileSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
-            removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+            // removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
           } else {
             console.log('not overwriting existing file')
-            removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+            // removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
           }
         } else {
           console.log('move the file to a new location')
           copyFileSync(path.resolve(this.props.todooJsonDir, 'todoo.json'), path.resolve(filenames[0], 'todoo.json'))
-          removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
+          // removeSync(path.resolve(this.props.todooJsonDir, 'todoo.json'))
         }
         this.props.dispatch(updateSettings({
           todooJsonDir: filenames[0]
